@@ -1,11 +1,13 @@
 interface EnvConfig {
   PORT: string | undefined
   NODE_ENV: string | undefined
+  MONGO_URI: string | undefined
 }
 
 const _envConfig: EnvConfig = {
   PORT: process.env.port,
-  NODE_ENV: process.env.NODE_ENV
+  NODE_ENV: process.env.NODE_ENV,
+  MONGO_URI: process.env.MONGO_URI
 }
 
 export const envConfig = {
