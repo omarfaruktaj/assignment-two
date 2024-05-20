@@ -13,7 +13,7 @@ interface Product {
   description: string
   price: number
   category: string
-  tags: [string]
+  tags: string[]
   variants: Variant[]
   inventory: Inventory
 }

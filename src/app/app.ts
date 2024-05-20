@@ -2,6 +2,7 @@ import express, { NextFunction, Request, Response } from 'express'
 import cors from 'cors'
 import AppError from '../utils/app-error'
 import globalErrorHandler from '../middlewares/globalErrorHandler'
+import productRoute from '../modules/product/product.route'
 
 const app = express()
 
@@ -10,7 +11,7 @@ app.use(cors())
 app.use(express.json())
 
 // routes
-
+app.use('/api', productRoute)
 // check health
 app.get('/health', (_req: Request, res: Response) => {
   res.status(200).json({

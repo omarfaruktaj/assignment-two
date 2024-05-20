@@ -10,8 +10,7 @@ export default [
   eslintConfigPrettier,
   {
     rules: {
-      'no-unused-vars': ['error', { argsIgnorePattern: 'next' }], // Ignore `next` in Express middlewares
-      'consistent-return': 'error',
+      'no-unused-vars': ['error', { argsIgnorePattern: 'next' }],
       'prefer-const': 'error',
       'no-console': 'warn'
     }
