@@ -8,6 +8,9 @@ router
   .post(productController.createAProduct)
   .get(productController.getAllProduct)
 
-router.route('/products/:productId').get(productController.getAProductById)
+router
+  .route('/products/:productId')
+  .get(productController.getAProductById)
+  .put(productController.updateProductById)
 
 export default router

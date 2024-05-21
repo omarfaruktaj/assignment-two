@@ -12,8 +12,13 @@ const getAProductById = (id: string) => {
   return productModel.findById(id)
 }
 
+const updateProductById = (id: string, data: Product) => {
+  return productModel.findByIdAndUpdate(id, data, { new: true, runValidators: true })
+}
+
 export default {
   createAProduct,
   getAllProducts,
-  getAProductById
+  getAProductById,
+  updateProductById
 }

@@ -49,5 +49,25 @@ const getAProductById = async (req: Request, res: Response, next: NextFunction) 
     next(error)
   }
 }
+const updateProductById = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { productId } = req.params
+    const result = productValidationSchema.safeParse(req.body)
 
-export default { createAProduct, getAllProduct, getAProductById }
+    if (!result.success) {
+      return next(result.error)
+    }
+
+    const product = await productService.updateProductById(productId, result.data)
+
+    res.status(200).json({
+      success: true,
+      message: 'Product updated successfully!',
+      data: product
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+
+export default { createAProduct, getAllProduct, getAProductById, updateProductById }
