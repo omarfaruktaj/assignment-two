@@ -41,15 +41,19 @@ const deleteProductById = async (id: string) => {
 
 const updateProductInventory = async (productId: string, quantity: number) => {
   const product = await ProductModel.findById(productId)
-
+  // check is product exist
   if (!product) throw new AppError('No product found.', 404)
 
-  if (product.inventory.quantity < quantity) throw new AppError('Insufficient stock', 400)
+  //check is sufficient quantity available in inventory
+  if (product.inventory.quantity < quantity)
+    throw new AppError('Insufficient quantity available in inventory', 400)
 
+  // update product quantity
   const updatedQuantity = product.inventory.quantity - quantity
 
   product.inventory.quantity = updatedQuantity
 
+  // update product stock
   product.inventory.inStock = updatedQuantity > 0
 
   await product.save()
