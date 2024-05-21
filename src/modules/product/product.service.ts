@@ -19,7 +19,7 @@ const getAProductById = (id: string) => {
 const updateProductById = async (id: string, data: Product) => {
   const product = await ProductModel.findById(id)
 
-  if (!product) throw new AppError('No product found.', 400)
+  if (!product) throw new AppError('No product found.', 404)
 
   const updatedProduct = await ProductModel.findByIdAndUpdate(id, data, {
     new: true,
@@ -32,11 +32,28 @@ const updateProductById = async (id: string, data: Product) => {
 const deleteProductById = async (id: string) => {
   const product = await ProductModel.findById(id)
 
-  if (!product) throw new AppError('No product found.', 400)
+  if (!product) throw new AppError('No product found.', 404)
 
   const deletedProduct = await ProductModel.findByIdAndDelete(id)
 
   return deletedProduct
+}
+
+const updateProductInventory = async (productId: string, quantity: number) => {
+  const product = await ProductModel.findById(productId)
+
+  if (!product) throw new AppError('No product found.', 404)
+
+  if (product.inventory.quantity < quantity) throw new AppError('Insufficient stock', 400)
+
+  const updatedQuantity = product.inventory.quantity - quantity
+
+  product.inventory.quantity = updatedQuantity
+
+  product.inventory.inStock = updatedQuantity > 0
+
+  await product.save()
+  return product
 }
 
 export default {
@@ -44,5 +61,6 @@ export default {
   getAllProducts,
   getAProductById,
   updateProductById,
-  deleteProductById
+  deleteProductById,
+  updateProductInventory
 }

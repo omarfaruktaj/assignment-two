@@ -1,8 +1,6 @@
-import mongoose from 'mongoose'
-
 interface Order {
   email: string
-  productId: mongoose.Schema.Types.ObjectId
+  productId: string
   price: number
   quantity: number
 }

@@ -1,4 +1,4 @@
-import mongoose, { Schema, model } from 'mongoose'
+import { Schema, model } from 'mongoose'
 import Order from './order.interface'
 import isEmail from 'validator/lib/isEmail'
 
@@ -12,8 +12,7 @@ const orderSchema = new Schema<Order>({
     }
   },
   productId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'products'
+    type: String
   },
   price: {
     type: Number,
