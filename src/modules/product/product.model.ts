@@ -50,6 +50,6 @@ const productSchema = new Schema<Product>(
   }
 )
 
-const productModel = model<Product>('Product', productSchema)
+const ProductModel = model<Product>('Product', productSchema)
 
-export default productModel
+export default ProductModel

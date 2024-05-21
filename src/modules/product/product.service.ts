@@ -1,24 +1,45 @@
+import AppError from '../../utils/app-error'
 import Product from './product.interface'
-import productModel from './product.model'
+import ProductModel from './product.model'
 
 const createAProduct = (data: Product) => {
-  return productModel.create(data)
+  return ProductModel.create(data)
 }
 
 const getAllProducts = () => {
-  return productModel.find()
+  return ProductModel.find()
 }
 const getAProductById = (id: string) => {
-  return productModel.findById(id)
+  return ProductModel.findById(id)
 }
 
-const updateProductById = (id: string, data: Product) => {
-  return productModel.findByIdAndUpdate(id, data, { new: true, runValidators: true })
+const updateProductById = async (id: string, data: Product) => {
+  const product = await ProductModel.findById(id)
+
+  if (!product) throw new AppError('No product found.', 400)
+
+  const updatedProduct = await ProductModel.findByIdAndUpdate(id, data, {
+    new: true,
+    runValidators: true
+  })
+
+  return updatedProduct
+}
+
+const deleteProductById = async (id: string) => {
+  const product = await ProductModel.findById(id)
+
+  if (!product) throw new AppError('No product found.', 400)
+
+  const deletedProduct = await ProductModel.findByIdAndDelete(id)
+
+  return deletedProduct
 }
 
 export default {
   createAProduct,
   getAllProducts,
   getAProductById,
-  updateProductById
+  updateProductById,
+  deleteProductById
 }
