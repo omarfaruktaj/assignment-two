@@ -20,6 +20,31 @@ const createOrder = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
+const getOrders = async (req: Request, res: Response, next: NextFunction) => {
+  const email = req.query.email as string
+
+  try {
+    const order = await orderService.getOrders(email)
+
+    if (email) {
+      return res.status(201).json({
+        success: true,
+        message: 'Orders fetched successfully for user email!',
+        data: order
+      })
+    }
+
+    res.status(201).json({
+      success: true,
+      message: 'Orders fetched successfully!',
+      data: order
+    })
+  } catch (err) {
+    next(err)
+  }
+}
+
 export default {
-  createOrder
+  createOrder,
+  getOrders
 }

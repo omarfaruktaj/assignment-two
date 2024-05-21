@@ -10,7 +10,14 @@ const createOrder = async (data: Order) => {
   const order = await OrderModel.create({ email, productId, price, quantity })
   return order
 }
+const getOrders = (email?: string) => {
+  if (email) {
+    return OrderModel.find({ email })
+  }
+  return OrderModel.find()
+}
 
 export default {
-  createOrder
+  createOrder,
+  getOrders
 }
