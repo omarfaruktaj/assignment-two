@@ -34,5 +34,20 @@ const getAllProduct = async (req: Request, res: Response, next: NextFunction) =>
     next(error)
   }
 }
+const getAProductById = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { productId } = req.params
 
-export default { createAProduct, getAllProduct }
+    const product = await productService.getAProductById(productId)
+
+    res.status(200).json({
+      success: true,
+      message: 'Products fetched successfully!',
+      data: product
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+
+export default { createAProduct, getAllProduct, getAProductById }

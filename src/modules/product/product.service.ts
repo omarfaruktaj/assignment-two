@@ -8,8 +8,12 @@ const createAProduct = (data: Product) => {
 const getAllProducts = () => {
   return productModel.find()
 }
+const getAProductById = (id: string) => {
+  return productModel.findById(id)
+}
 
 export default {
   createAProduct,
-  getAllProducts
+  getAllProducts,
+  getAProductById
 }
