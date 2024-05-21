@@ -50,6 +50,8 @@ const productSchema = new Schema<Product>(
   }
 )
 
+productSchema.index({ name: 'text' })
+
 const ProductModel = model<Product>('Product', productSchema)
 
 export default ProductModel

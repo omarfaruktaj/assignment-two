@@ -6,7 +6,10 @@ const createAProduct = (data: Product) => {
   return ProductModel.create(data)
 }
 
-const getAllProducts = () => {
+const getAllProducts = (searchTerm?: string) => {
+  if (searchTerm) {
+    return ProductModel.find({ $text: { $search: searchTerm as string } })
+  }
   return ProductModel.find()
 }
 const getAProductById = (id: string) => {
