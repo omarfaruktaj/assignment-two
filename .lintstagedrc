@@ -1,5 +1,3 @@
 {
-  "lint-staged": {
-    "*.ts": ["prettier --write --ignore-unknown", "eslint src --fix"]
-  }
+  "*.ts": ["prettier --write --ignore-unknown", "eslint src --fix"]
 }

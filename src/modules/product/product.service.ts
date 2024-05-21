@@ -5,6 +5,11 @@ const createAProduct = (data: Product) => {
   return productModel.create(data)
 }
 
+const getAllProducts = () => {
+  return productModel.find()
+}
+
 export default {
-  createAProduct
+  createAProduct,
+  getAllProducts
 }

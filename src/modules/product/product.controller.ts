@@ -21,4 +21,18 @@ const createAProduct = async (req: Request, res: Response, next: NextFunction) =
   }
 }
 
-export default { createAProduct }
+const getAllProduct = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const products = await productService.getAllProducts()
+
+    res.status(200).json({
+      success: true,
+      message: 'Products fetched successfully!',
+      data: products
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+
+export default { createAProduct, getAllProduct }
