@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import productValidationSchema from './product.validation'
 import productService from './product.service'
+import AppError from '../../utils/app-error'
 
 const createAProduct = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -49,6 +50,8 @@ const getAProductById = async (req: Request, res: Response, next: NextFunction) 
     const { productId } = req.params
 
     const product = await productService.getAProductById(productId)
+
+    if (!product) return next(new AppError('No product found', 404))
 
     res.status(200).json({
       success: true,

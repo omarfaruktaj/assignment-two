@@ -50,7 +50,7 @@ const productSchema = new Schema<Product>(
   }
 )
 
-productSchema.index({ name: 'text' })
+productSchema.index({ name: 'text', description: 'text', category: 'text' })
 
 const ProductModel = model<Product>('Product', productSchema)
 

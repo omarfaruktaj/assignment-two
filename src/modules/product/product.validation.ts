@@ -10,7 +10,7 @@ export const VariantValidationSchema = z.object(
 
 export const InventoryValidationSchema = z.object(
   {
-    quantity: z.number().positive('Product price must be a non-negative number'),
+    quantity: z.number().nonnegative('Product price must be a non-negative number'),
     inStock: z.boolean({ required_error: 'Inventory inStock must be a boolean value' })
   },
   { message: 'Product inventory is required' }
@@ -23,11 +23,11 @@ const productValidationSchema = z.object({
     .max(200, { message: 'Product name must be 200 or fewer characters long' }),
   description: z
     .string({ required_error: 'Product description is required' })
-    .min(15, { message: 'Product description must be 5 or more characters long' })
+    .min(5, { message: 'Product description must be 5 or more characters long' })
     .max(1500, { message: 'Product description must be 1500 or fewer characters long' }),
   price: z
     .number({ required_error: 'Product price is required' })
-    .positive({ message: 'Product price must be a non-negative number' }),
+    .nonnegative({ message: 'Product price must be a non-negative number' }),
   category: z
     .string({ required_error: 'Product category is required' })
     .min(1, { message: 'Product category must be 1 or more characters long' })

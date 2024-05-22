@@ -140,3 +140,5 @@ dist
 .svelte-kit
 
 rest-client.rest
+rest-client-prod.rest
+.vercel

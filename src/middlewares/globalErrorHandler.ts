@@ -15,13 +15,15 @@ const handleDevelopmentError = (err: AppError, _req: Request, res: Response) => 
 const handleProductionError = (err: AppError, req: Request, res: Response) => {
   if (err.isOperational) {
     return res.status(err.statusCode).json({
-      status: err.status,
+      // status: err.status,
+      success: false,
       message: err.message
     })
   }
 
   return res.status(500).json({
-    status: 'error',
+    // status: 'error',
+    success: false,
     message: 'Something went very wrong!'
   })
 }

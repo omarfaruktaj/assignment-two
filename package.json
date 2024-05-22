@@ -1,7 +1,7 @@
 {
   "name": "assignment-2",
   "version": "1.0.0",
-  "main": "dist/src/server.js",
+  "main": "dist/server.js",
   "author": "omar faruk",
   "license": "MIT",
   "private": true,

@@ -13,6 +13,7 @@ app.use(express.json())
 // routes
 app.use('/api', productRoute)
 app.use('/api', orderRoute)
+
 // check health
 app.get('/health', (_req: Request, res: Response) => {
   res.status(200).json({
@@ -21,8 +22,15 @@ app.get('/health', (_req: Request, res: Response) => {
   })
 })
 
+app.get('/', (_req: Request, res: Response) => {
+  res.status(200).json({
+    success: true,
+    message: 'Welcome to our E-commerce backend.'
+  })
+})
+
 app.all('*', (req: Request, _res: Response, next: NextFunction) => {
-  next(new AppError(`Can't find ${req.originalUrl} in this server.`, 404))
+  next(new AppError(`Route not found`, 404))
 })
 
 app.use(globalErrorHandler)
